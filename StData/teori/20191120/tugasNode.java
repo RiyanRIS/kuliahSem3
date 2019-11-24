@@ -9,6 +9,7 @@ class Node{
 }
 
 class tugasNode{
+    private Scanner in = new Scanner(System.in);
     private Node head,tail;
     public tugasNode(){
         head = null;
@@ -121,7 +122,7 @@ class tugasNode{
     public void cariLinear(int d)
     {
         if (head==null) // jika senarai masih kosong
-        System.out.println("\n....MAAF SENARAI KOSONG....");
+        System.out.println("\n....LIST KOSONG....\nPencarian tidak dapat dilakukan");
         else // jika senarai tidak kosong
         {
             boolean statusKetemu = false;
@@ -140,6 +141,37 @@ class tugasNode{
                 i++;
             }
             System.out.println("\nStatus Ketemu = "+statusKetemu +" di posisi ke "+posisiKetemu);
+        }
+    }
+
+    public void editData(){
+        if (head==null){
+            System.out.println("\n....LIST KOSONG....\nPencarian tidak dapat dilakukan");
+        }else{
+            System.out.print("Masukkan Data Yang di Edit : ");
+            int data = in.nextInt();
+            System.out.print(data+" di edit menjadi :");
+            int pengganti = in.nextInt();
+
+
+            boolean statusKetemu = false;
+            int i = 0;
+            int posisiKetemu=-1;
+            Node bantu;
+            bantu = head;
+            while (bantu != null)
+            {
+                if (data==bantu.data)
+                { 
+                    // Node nodeBaru = new Node(pengganti);
+                    statusKetemu = true;
+                    posisiKetemu = i;
+                    bantu.data = pengganti;
+                }
+                bantu = bantu.next;
+                i++;
+            }
+            System.out.println("\n" + data + " telah diedit menjadi " + pengganti);
         }
     }
 
@@ -180,9 +212,11 @@ class tugasNode{
                 System.out.println("\n1. Input Didepan");
                 System.out.println("2. Input Dibelakang");
                 System.out.print("Masukkan Pilihan : ");
+
                 pilihankedua = in.nextInt();
                 System.out.print("Masukkan Data : ");
                 data = in.nextInt();
+
                 if(pilihankedua==1){
                     tg.tambahDepan(data);
                 }else if(pilihankedua==2){
@@ -192,7 +226,8 @@ class tugasNode{
                 }
                 tg.cetakSenarai();
             }else if(pilihan==2){
-                System.out.println("\n--- BELUM BISA MELAKUKAN EDIT DATA ---");
+                // System.out.println("\n--- BELUM BISA MELAKUKAN EDIT DATA ---");
+                tg.editData();
             }else if(pilihan == 3){
                 System.out.println("1. Hapus Didepan");
                 System.out.println("2. Hapus Dibelakang");
@@ -210,7 +245,7 @@ class tugasNode{
             }else if(pilihan == 4){
                 int OXO = tg.hitungJumlahSimpul();
                 if(OXO==0){
-                    System.out.println("\n.........List Kosong..........\n Tidak ada data yang diurutkan");
+                    System.out.println("\n.........List Kosong..........\n Tidak ada data untuk diurutkan");
                 }else{
                     tg.mengurutkanData();
                     tg.cetakSenarai();
