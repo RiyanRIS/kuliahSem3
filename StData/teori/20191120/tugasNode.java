@@ -33,6 +33,7 @@ class tugasNode{
         }else{
             tail.next = baru;
             tail = baru;
+            baru.next = null;
         }
     }
 
@@ -43,7 +44,7 @@ class tugasNode{
             temp.next = null;
             return temp;
         }else{
-            System.out.println("List kosong.");
+            System.out.println("\nList kosong");
             return null;
         }
     }
@@ -65,7 +66,7 @@ class tugasNode{
             }
             return temp;
         }else{
-            System.out.println("List Kosong.");
+            System.out.println("\nList Kosong");
             return null;
         }
     }
@@ -120,7 +121,7 @@ class tugasNode{
     public void cariLinear(int d)
     {
         if (head==null) // jika senarai masih kosong
-        System.out.print("....MAAF SENARAI KOSONG....");
+        System.out.println("\n....MAAF SENARAI KOSONG....");
         else // jika senarai tidak kosong
         {
             boolean statusKetemu = false;
@@ -138,12 +139,13 @@ class tugasNode{
                 bantu = bantu.next;
                 i++;
             }
-            System.out.println("Status Ketemu = "+statusKetemu +" di posisi ke "+posisiKetemu);
+            System.out.println("\nStatus Ketemu = "+statusKetemu +" di posisi ke "+posisiKetemu);
         }
     }
 
     public void cetakSenarai()
     {
+        System.out.println("\nList Data :");
         if (head==null)
         System.out.print("....List Kosong.....");
         else
@@ -152,10 +154,11 @@ class tugasNode{
             bantu = head;
             while (bantu != null)
             {
-                System.out.println(bantu.data + "\t ");
+                System.out.print(bantu.data + "\t ");
                 bantu = bantu.next;
             }
         }
+        System.out.println();
     }
 
     public static void main(String[] args){
@@ -163,7 +166,7 @@ class tugasNode{
         Scanner in = new Scanner(System.in);
         int pilihan,pilihankedua,data;
         do{
-            System.out.println("----- PILIHAN ----");
+            System.out.println("\n----- PILIHAN ----");
             System.out.println("1. Input Data");
             System.out.println("2. Edit Data");
             System.out.println("3. Hapus Data");
@@ -174,7 +177,7 @@ class tugasNode{
             System.out.print("Masukkan Pilihan : ");
             pilihan = in.nextInt();
             if(pilihan == 1){
-                System.out.println("1. Input Didepan");
+                System.out.println("\n1. Input Didepan");
                 System.out.println("2. Input Dibelakang");
                 System.out.print("Masukkan Pilihan : ");
                 pilihankedua = in.nextInt();
@@ -183,13 +186,13 @@ class tugasNode{
                 if(pilihankedua==1){
                     tg.tambahDepan(data);
                 }else if(pilihankedua==2){
-                    tg.tambahDepan(data);
+                    tg.tambahBelakang(data);
                 }else{
                     System.out.println("Inputan Salah.");
                 }
                 tg.cetakSenarai();
             }else if(pilihan==2){
-                System.out.println("--- BELUM BISA ---");
+                System.out.println("\n--- BELUM BISA MELAKUKAN EDIT DATA ---");
             }else if(pilihan == 3){
                 System.out.println("1. Hapus Didepan");
                 System.out.println("2. Hapus Dibelakang");
@@ -197,21 +200,28 @@ class tugasNode{
                 pilihankedua = in.nextInt();
                 if(pilihankedua==1){
                     tg.hapusDepan();
+                    tg.cetakSenarai();
                 }else if(pilihankedua==2){
                     tg.hapusBelakang();
+                    tg.cetakSenarai();
                 }else{
                     System.out.println("Inputan Salah.");
                 }
-                tg.cetakSenarai();
             }else if(pilihan == 4){
-                tg.mengurutkanData();
-                tg.cetakSenarai();
+                int OXO = tg.hitungJumlahSimpul();
+                if(OXO==0){
+                    System.out.println("\n.........List Kosong..........\n Tidak ada data yang diurutkan");
+                }else{
+                    tg.mengurutkanData();
+                    tg.cetakSenarai();
+                }
             }else if(pilihan == 5){
                 System.out.print("Masukkan Data Yang Dicari : ");
                 data = in.nextInt();
                 tg.cariLinear(data);
             }else if(pilihan == 6){
                 tg.cetakSenarai();
+            }else if(pilihan == 7){
             }else{
                 System.out.println("Inputan Salah");
             }
